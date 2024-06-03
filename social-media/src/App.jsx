@@ -3,22 +3,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Sidebar from "./Components/Sidebar";
-import CreatePost from "./Components/CreatePost";
-import PostList from "./Components/PostList";
-import { useState } from "react";
-
+import Store from "./Store/Store.jsx";
+import ShowContent from "./Components/ShowContent.jsx";
 function App() {
-  const [show, setShow] = useState(true);
-
   return (
-    <div className="app-container">
-      <Sidebar show={show} setShow={setShow}></Sidebar>
-      <div className="content">
-        <Header></Header>
-        {show == true ? <CreatePost></CreatePost> : <PostList></PostList>}
-        <Footer></Footer>
+    <Store>
+      <div className="app-container">
+        <Sidebar ></Sidebar>
+        <div className="content">
+          <Header></Header>
+          <ShowContent></ShowContent>
+          <Footer></Footer>
+        </div>
       </div>
-    </div>
+    </Store>
   );
 }
 

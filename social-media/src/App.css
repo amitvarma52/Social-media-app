@@ -14,3 +14,18 @@
 li:focus{
   background-color: red;
 }
+.post-card{
+  margin: 20px 50px ;
+}
+.delete-btn{
+  padding: 20px;
+}
+.hastags{
+  margin: 0px 4px;
+  padding: 3px 5px;
+}
+.reactions{
+  width: 100%;
+  margin: 0;
+  margin-top: 15px ;
+}

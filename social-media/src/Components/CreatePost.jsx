@@ -1,40 +1,62 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { appContext } from "../Store/Store";
 
 const CreatePost = () => {
+  const { handleAddPost } = useContext(appContext);
+  const [title, setTitle] = useState("");
+  const [hashtags,setHashTags]=useState("")
+  const [description, setDescription] = useState("");
+  const handleSubmit = () => {
+    handleAddPost(title, description,hashtags);
+    setTitle("")
+    setDescription("")
+    setHashTags("")
+  };
   return (
     <>
       <form>
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
+          <label className="form-label">Post Name</label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
           />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div>
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Password
-          </label>
+          <label className="form-label">description</label>
           <input
-            type="password"
+            type="text"
             className="form-control"
             id="exampleInputPassword1"
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
           />
         </div>
-        <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
-          </label>
+        <div className="mb-3">
+          <label className="form-label">Hashtags</label>
+          <input
+            type="text"
+            className="form-control"
+            id="exampleInputPassword1"
+            value={hashtags}
+            onChange={(e) => {
+              setHashTags(e.target.value);
+            }}
+          />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={handleSubmit}
+        >
           Submit
         </button>
       </form>

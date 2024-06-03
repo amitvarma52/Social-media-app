@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { appContext } from "../Store/Store";
 
-const Sidebar = ({ show, setShow }) => {
+const Sidebar = () => {
+  const { show, setShow } = useContext(appContext);
   const handleHome = () => {
     setShow(true);
   };
@@ -54,7 +56,7 @@ const Sidebar = ({ show, setShow }) => {
               <svg className="bi pe-none me-2" width="16" height="16">
                 <use xlinkHref="#speedometer2"></use>
               </svg>
-              Create post
+              posts
             </a>
           </li>
         </ul>
