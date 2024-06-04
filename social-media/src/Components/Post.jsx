@@ -10,8 +10,8 @@ const Post = ({ id, title, description, hashtags }) => {
       <div className="card post-card" style={{ width: "30rem" }}>
         <div className="card-body">
           <span
-            onClick={(e)=>{handleDeletePost(id)
-              console.log(id)
+            onClick={(e) => {
+              handleDeletePost(id);
             }}
             className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger delete-btn"
           >

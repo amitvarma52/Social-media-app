@@ -29,3 +29,23 @@ li:focus{
   margin: 0;
   margin-top: 15px ;
 }
+.create-post{
+  width: 80%;
+  margin: auto; 
+  margin-top: 45px;
+}
+.create-post input,.create-post textarea{
+  padding: 15px 10px; 
+}
+.create-post label{
+  color: blue;
+  font-weight: bold;
+}
+.create-post input::placeholder,.create-post textarea::placeholder {
+  font-size: 15px;
+}
+.create-post button{
+  margin-top: 10px;
+  position: relative;
+  left: 45%;
+}

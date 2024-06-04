@@ -5,7 +5,7 @@ import { appContext } from "../Store/Store";
 const PostList = () => {
   const obj = useContext(appContext);
   if(obj.cardObj.length ===0){
-    return <h1>no post yet </h1>
+    return <h1 style={{marginLeft:"37%",padding:"40px"}}>no post yet </h1>
   }
   return (
     <>
