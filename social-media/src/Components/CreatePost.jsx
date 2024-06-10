@@ -6,15 +6,16 @@ const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [hashtags,setHashTags]=useState("")
   const [description, setDescription] = useState("");
-  const handleSubmit = () => {
-    handleAddPost(title, description,hashtags);
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    handleAddPost(title, description,hashtags.split(" "));
     setTitle("")
     setDescription("")
     setHashTags("")
   };
   return (
     <>
-      <form className="create-post">
+      <form className="create-post" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Post Title</label>
           <input
@@ -58,7 +59,7 @@ const CreatePost = () => {
         <button
           type="submit"
           className="btn btn-primary"
-          onClick={handleSubmit}
+          
         >
           Submit
         </button>

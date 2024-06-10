@@ -1,25 +1,45 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Post from "./Post";
 import { appContext } from "../Store/Store";
+import Loading from "./Loading";
+import NoPost from "./NoPost";
+
 
 const PostList = () => {
-  const obj = useContext(appContext);
-  if(obj.cardObj.length ===0){
-    return <h1 style={{marginLeft:"37%",padding:"40px"}}>no post yet </h1>
-  }
+  const { cardObj, getServerData } = useContext(appContext);
+  const [load, setLoad] = useState(false);
+  useEffect(() => {
+    setLoad(true);
+    const controller=new AbortController()
+    const signal = controller.signal
+    fetch("https://dummyjson.com/posts",{signal})
+      .then((res) => res.json())
+      .then((data) => {
+        getServerData(data.posts);
+        setLoad(false);
+      });
+     return ()=>{
+      console.log("component killed ")
+      controller.abort()
+     }
+  }, []);
+
   return (
     <>
-      {obj.cardObj.map((element) => {
-        return (
-          <Post
-            key={element.id}
-            id={element.id}
-            title={element.title}
-            description={element.description}
-            hashtags={element.hashtags}
-          ></Post>
-        );
-      })}
+      {load && <Loading />}
+      {!load && cardObj.length === 0 && <NoPost/>}
+      {!load &&
+        cardObj.map((element) => {
+          return (
+            <Post
+              key={element.id}
+              id={element.id}
+              title={element.title}
+              description={element.body}
+              tags={element.tags}
+            ></Post>
+          );
+        })}
     </>
   );
 };

@@ -1,12 +1,16 @@
-import React, { useReducer } from "react";
+import React, { useCallback, useReducer } from "react";
 import { createContext } from "react";
-import { useState } from "react";
 export const appContext = createContext();
 const reducer = (currentvalue, action) => {
   if (action.type === "add") {
     const newCardObj = [
       ...currentvalue,
-      {id:currentvalue.length, title: action.payload.title, description: action.payload.description,hashtags:action.payload.hashtags },
+      {
+        id: Date.now(),
+        title: action.payload.title,
+        body: action.payload.body,
+        tags: action.payload.tags,
+      },
     ];
     return newCardObj;
   } else if (action.type === "delete") {
@@ -14,35 +18,52 @@ const reducer = (currentvalue, action) => {
       return element.id != action.payload.deleteItem;
     });
     return newCardObj;
+  } else if (action.type === "get_server") {
+    const newCardObj = action.payload;
+    return newCardObj;
   }
 };
 const Store = ({ children }) => {
-  const [show, setShow] = useState(true);
   const [cardObj, cardDispatch] = useReducer(reducer, []);
-  const handleAddPost = (title, description,hashtags) => {
+  const handleAddPost = (title, body, tags) => {
     const newAddObject = {
       type: "add",
       payload: {
         title,
-        description,
-        hashtags
+        body,
+        tags,
       },
     };
     cardDispatch(newAddObject);
   };
-  const handleDeletePost = (deleteItem) => {
-    const newDeleteObject = {
-      type: "delete",
-      payload: {
-        deleteItem,
-      },
+  const getServerData = (serverData) => {
+    const newAddObject = {
+      type: "get_server",
+      payload: serverData,
     };
-    cardDispatch(newDeleteObject);
+    cardDispatch(newAddObject);
   };
+  const handleDeletePost = useCallback(
+    (deleteItem) => {
+      const newDeleteObject = {
+        type: "delete",
+        payload: {
+          deleteItem,
+        },
+      };
+      cardDispatch(newDeleteObject);
+    },
+    [cardDispatch]
+  );
 
   return (
     <appContext.Provider
-      value={{ show, setShow, cardObj, handleAddPost, handleDeletePost }}
+      value={{
+        cardObj,
+        handleAddPost,
+        handleDeletePost,
+        getServerData,
+      }}
     >
       {children}
     </appContext.Provider>
