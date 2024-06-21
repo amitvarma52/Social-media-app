@@ -27,7 +27,7 @@ const Post = ({ id, title, description, tags }) => {
               key={element}
               className="badge rounded-pill text-bg-warning hastags"
             >
-              {element}
+              {`#${element}`}
             </span>
           ))}
           <div className="alert alert-info reactions" role="alert">
