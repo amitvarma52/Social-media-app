@@ -31,7 +31,7 @@ const Post = ({ id, title, description, tags }) => {
             </span>
           ))}
           <div className="alert alert-info reactions" role="alert">
-            This post has been reacted by 3 people
+            This post has been reacted by 0 people
           </div>
         </div>
       </div>

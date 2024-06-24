@@ -1,17 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Sidebar = ({ show, setShow }) => {
-  const handleHome = () => {
-    setShow(true);
-  };
-  const handlePost = () => {
-    setShow(false);
-  };
+const Sidebar = ({show,setShow}) => {
+  const handleTrue=()=>{
+    setShow(false)
+  }
+ const handleFalse = () => {
+   setShow(true);
+ }; 
   return (
     <>
       <div
         className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar"
-        style={{ width: "200px" ,height:"100vh" ,position:"sticky",top:"0"}}
+        style={{
+          width: "200px",
+          height: "100vh",
+          position: "sticky",
+          top: "0",
+        }}
       >
         <a
           href="/"
@@ -25,37 +31,36 @@ const Sidebar = ({ show, setShow }) => {
         <hr />
         <ul className="nav nav-pills flex-column mb-auto">
           <li className="nav-item">
-            <a
-              href="#"
+            <Link
+              to="/"
               className={
-                show === false
-                  ? "nav-link text-white"
-                  : "nav-link text-white active"
+                show == false
+                  ? "change nav-link text-white active"
+                  : "change nav-link text-white "
               }
-              aria-current="page"
-              onClick={handleHome}
+              onClick={handleTrue}
             >
               <svg className="bi pe-none me-2" width="16" height="16">
                 <use xlinkHref="#home"></use>
               </svg>
-              Create
-            </a>
+              Posts
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/create-post"
               className={
-                show === true
-                  ? "nav-link text-white"
-                  : "nav-link text-white active"
+                show == true
+                  ? "change nav-link text-white active"
+                  : "change nav-link text-white "
               }
-              onClick={handlePost}
+              onClick={handleFalse}
             >
               <svg className="bi pe-none me-2" width="16" height="16">
                 <use xlinkHref="#speedometer2"></use>
               </svg>
-              posts
-            </a>
+              Create
+            </Link>
           </li>
         </ul>
         <hr />

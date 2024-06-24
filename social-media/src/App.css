@@ -68,3 +68,6 @@ li:focus{
 .spinner{
   margin: 10%;
 }
+.nav li{
+  color: red;
+}

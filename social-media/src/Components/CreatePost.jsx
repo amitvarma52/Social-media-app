@@ -1,17 +1,22 @@
 import React, { useContext, useState } from "react";
 import { appContext } from "../Store/Store";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 const CreatePost = () => {
+  const {setShow} = useOutletContext()
   const { handleAddPost } = useContext(appContext);
   const [title, setTitle] = useState("");
-  const [hashtags,setHashTags]=useState("")
+  const [hashtags, setHashTags] = useState("");
   const [description, setDescription] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
-    e.preventDefault()
-    handleAddPost(title, description,hashtags.split(" "));
-    setTitle("")
-    setDescription("")
-    setHashTags("")
+    e.preventDefault();
+    handleAddPost(title, description, hashtags.split(" "));
+    setTitle("");
+    setDescription("");
+    setHashTags("");
+    navigate("/");
+    setShow(false)
   };
   return (
     <>
@@ -33,7 +38,7 @@ const CreatePost = () => {
         <div className="mb-3">
           <label className="form-label">Hashtags</label>
           <input
-          placeholder="enter space after each hashtags"   
+            placeholder="enter space after each hashtags"
             type="text"
             className="form-control"
             id="exampleInputPassword1"
@@ -46,7 +51,7 @@ const CreatePost = () => {
         <div className="mb-3">
           <label className="form-label">description</label>
           <textarea
-          placeholder="describe more about it"
+            placeholder="describe more about it"
             type="text"
             className="form-control"
             id="exampleInputPassword1"
@@ -56,11 +61,7 @@ const CreatePost = () => {
             }}
           />
         </div>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          
-        >
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>
